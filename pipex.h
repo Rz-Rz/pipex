@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2022/12/28 20:48:04 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/01 21:15:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@
 
 typedef struct s_pipex
 {
-	char	**cmd1;
-	char	**cmd2;
+	char	**argv;
+	char	**envp;
+	char	**cmd;
 	char	*path;
 	char 	**paths;
 	char	*file1;
 	char	*file2;
-	char	*cmd1_path;
-	char	*cmd2_path;
+	char	*cmd_path;
 	int		fd[2];
 	int		children1;
 	int		children2;
@@ -66,13 +66,17 @@ int		f_open(char *file, int flag, int mode);
 void	get_paths(t_pipex *pipex, char *envp[]);
 char	*check_slash(char *str);
 char	*get_cmd(t_pipex *pipex, char *cmd);
+void	close_fd(t_pipex *pipex);
 
 // error.c
 void	generic_err(t_pipex *pipex, char *str, int system);
 void	free_pipex(t_pipex *pipex);
 
 // childs.c
-int	exec(t_pipex *pipex, char *argv[], char *envp[], int arg);
+int		exec(t_pipex *pipex, int arg, int stdin, int stdout);
+
+// pipex.c
+void	child_exec(t_pipex *pipex);
 
 
 #endif

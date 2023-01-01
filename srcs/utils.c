@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2022/12/28 21:43:30 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/01 21:12:02 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,11 @@ char *check_slash(char *str)
 	if (str[i - 1] == '/')
 		str[i - 1] = '\0';
 	return (str);
+}
+
+void close_fd(t_pipex *pipex)
+{
+	close(pipex->fd_file1);
+	close(pipex->fd[0]);
+	close(pipex->fd_file2);
 }
