@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/01 21:03:24 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/02 18:48:51 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	generic_err(t_pipex *pipex, char *str, int system)
 		write(2, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
 }
+
 
 void	free_pipex(t_pipex *pipex)
 {
