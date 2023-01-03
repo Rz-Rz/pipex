@@ -6,11 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/02 20:49:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/03 11:55:54 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../includes/pipex_bonus.h"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -53,6 +53,7 @@ int main(int argc, char *argv[], char *envp[])
 	check_mode_infile(&pipex);
 	check_mode_outfile(&pipex);
 	get_paths(&pipex, envp);
+
 	while (i < argc - 2)
 		multipipe(argv[i++], &pipex);
 	if (pipe(pipex.fd) == -1)

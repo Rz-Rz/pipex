@@ -6,11 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:33:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/02 19:34:55 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:03:37 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../includes/pipex_bonus.h"
 #include <unistd.h>
 
 void   check_mode_infile(t_pipex *pipex)
@@ -34,10 +34,13 @@ void	check_mode_outfile(t_pipex *pipex)
 
 void   here_doc(t_pipex *pipex)
 {
-	int		fd;
 	char	*line;
 
-	fd = f_open(".heredoc_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+
+	if (pipe(pipex->fd) == -1)
+		generic_err(pipex, "Pipe error.\n", 1);
+	pipex->pid = fork();
+
 	while (1)
 	{
 		write(1, "heredoc> ", 9);

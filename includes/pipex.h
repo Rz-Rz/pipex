@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/03 11:56:49 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/03 11:55:10 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@
 /* errno */
 # include <errno.h>
 
-# include "libft/libft.h"
-
-# include "bonus/get_next_line.h"
-/* # define EXIT_SUCCESS 0 */
-/* # define EXIT_FAILURE -1 */
+# include "../libft/libft.h"
 
 typedef struct s_pipex
 {
@@ -50,15 +46,12 @@ typedef struct s_pipex
 	char	**cmd;
 	char	*path;
 	char 	**paths;
-	char	*file1;
-	char	*file2;
 	char	*cmd_path;
-	int		heredoc;
 	int		fd[2];
 	int		children1;
 	int		children2;
 	int		status;
-	int		fd_file1
+	int		fd_file1;
 	int		fd_file2;
 	int		argc;
 
@@ -75,22 +68,10 @@ void	close_fd(t_pipex *pipex);
 void	generic_err(t_pipex *pipex, char *str, int system);
 void	free_pipex(t_pipex *pipex);
 
-// error bonus
-void 	unlink_err(t_pipex *pipex, char *str, int system, char *target);
-
 // childs.c
 int		exec(t_pipex *pipex, int arg, int stdin, int stdout);
 
 // pipex.c
 void	child_exec(t_pipex *pipex);
-
-// child bonus
-int		exec_bonus(t_pipex *pipex, char *cmd, int stdin, int stdout)
-
-// here_doc.c
-void	here_doc(t_pipex *pipex);
-void	check_mode_infile(t_pipex *pipex);
-void	check_mode_outfile(t_pipex *pipex);
-
 
 #endif
