@@ -6,11 +6,11 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/01 21:31:23 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/05 23:10:07 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../includes/pipex_bonus.h"
 
 int f_open(char *file, int flag, int mode)
 {
@@ -34,10 +34,10 @@ void	get_paths(t_pipex *pipex, char *envp[])
 		envp++;
 	pipex->path = ft_strdup(*envp + 5);
 	if (pipex->path == NULL)
-		generic_err(pipex, "Malloc error. (ft_strdup)\n", 0);
+		generic_err(pipex, "Malloc error. (get_paths -> ft_strdup)", 0);
 	pipex->paths = ft_split(pipex->path, ':');
 	if (pipex->paths == NULL)
-		generic_err(pipex, "Malloc error. (ft_split)\n", 0);
+		generic_err(pipex, "Malloc error. (get_paths -> ft_split)", 0);
 }
 
 char *get_cmd(t_pipex *pipex, char *cmd)
@@ -53,10 +53,10 @@ char *get_cmd(t_pipex *pipex, char *cmd)
 		tmp = ft_strjoin(pipex->paths[i], "/");
 		tmp2 = tmp;
 		if (tmp == NULL)
-			generic_err(pipex, "Malloc error. (ft_strjoin)\n", 0);
+			generic_err(pipex, "Malloc error. (get_cmd -> ft_strjoin)", 0);
 		tmp = ft_strjoin(tmp, cmd);
 		if (tmp == NULL)
-			generic_err(pipex, "Malloc error. (ft_strjoin)\n", 0);
+			generic_err(pipex, "Malloc error. (get_cmd -> ft_strjoin)", 0);
 		if (access(tmp, F_OK | X_OK) == 0)
 		{
 			free(tmp2);

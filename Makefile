@@ -6,7 +6,7 @@
 #    By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:25:53 by kdhrif            #+#    #+#              #
-#    Updated: 2023/01/01 21:56:14 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/01/05 22:47:44 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ CC       = gcc
 CFLAGS   = -g3 -Wall -Wextra -Werror
 LIB      = libft/libft.a
 HEADERS  = pipex.h
+BONUS_HEADERS = includes/pipex_bonus.h
 
 all: $(NAME)
 
@@ -52,8 +53,8 @@ ${NAME}: $(LIB) $(OBJS_DIR) $(OBJS) ${HEADERS}
 ${BONUS_OBJS_DIR}/%.o: ${BONUS_DIR}/%.c
 	@${CC} ${CFLAGS} -c $< -o $@
 
-${BONUS_NAME}: $(LIB) $(BONUS_OBJS_DIR) $(BONUS_OBJS) ${HEADERS}
-	$(CC) $(BONUS_OBJS) ${LIB} -o $(BONUS_NAME)
+${BONUS_NAME}: $(LIB) $(BONUS_OBJS_DIR) $(BONUS_OBJS) ${BONUS_HEADERS}
+	$(CC) $(CFLAGS) $(BONUS_OBJS) ${LIB} -o $(BONUS_NAME)
 	@echo "\033[32m$ ${NAME} compiled !"
 
 bonus: ${BONUS_NAME}

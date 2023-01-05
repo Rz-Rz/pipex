@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/03 11:56:40 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/05 22:02:58 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_pipex
 	int		fd[2];
 	int		children1;
 	int		children2;
+	int		pid;
 	int		status;
 	int		fd_file1;
 	int		fd_file2;
@@ -89,8 +90,9 @@ int		exec_bonus(t_pipex *pipex, char *cmd, int stdin, int stdout);
 
 // here_doc.c
 void	here_doc(t_pipex *pipex);
-void	check_mode_infile(t_pipex *pipex);
+void	check_mode_infile(t_pipex *pipex, int *i);
 void	check_mode_outfile(t_pipex *pipex);
+void	put_heredoc(t_pipex *pipex);
 
 
 #endif
