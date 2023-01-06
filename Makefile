@@ -6,7 +6,7 @@
 #    By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:25:53 by kdhrif            #+#    #+#              #
-#    Updated: 2023/01/05 22:47:44 by kdhrif           ###   ########.fr        #
+#    Updated: 2023/01/06 20:48:27 by kdhrif           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BONUS_OBJS = ${patsubst %.c,${BONUS_OBJS_DIR}/%.o,${BONUS}}
 CC       = gcc
 CFLAGS   = -g3 -Wall -Wextra -Werror
 LIB      = libft/libft.a
-HEADERS  = pipex.h
+HEADERS  = includes/pipex.h
 BONUS_HEADERS = includes/pipex_bonus.h
 
 all: $(NAME)
@@ -47,7 +47,7 @@ ${LIB} :
 	@make -C libft
 
 ${NAME}: $(LIB) $(OBJS_DIR) $(OBJS) ${HEADERS}
-	$(CC) $(OBJS) ${LIB} -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) ${LIB} -o $(NAME)
 	@echo "\033[32m$ ${NAME} compiled !"
 
 ${BONUS_OBJS_DIR}/%.o: ${BONUS_DIR}/%.c

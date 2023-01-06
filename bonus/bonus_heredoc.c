@@ -6,11 +6,12 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:33:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/05 23:36:19 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/06 20:10:49 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
+#include <stdlib.h>
 #include <unistd.h>
 
 void   check_mode_infile(t_pipex *pipex, int *i)
@@ -54,7 +55,7 @@ void   here_doc(t_pipex *pipex)
 			generic_err(pipex, "Close error. (here_doc)", 1);
 		if (dup2(pipex->fd[0], STDIN_FILENO) == -1)
 			generic_err(pipex, "Dup2 error. (here_doc)", 1);
-		/* wait(NULL); */
+		waitpid(pipex->pid, NULL, 0);
 	}
 }
 
@@ -70,7 +71,11 @@ void	put_heredoc(t_pipex *pipex)
 		if (line == NULL)
 			generic_err(pipex, "Get next line failed. (put_heredoc)", 0);
 		if (ft_strncmp(line, pipex->argv[2], ft_strlen(pipex->argv[2])) == 0)
-			break ;
+		{
+			free(line);
+			close(pipex->fd[1]);
+			exit(EXIT_SUCCESS);
+		}
 		ft_putstr_fd(line, pipex->fd[1]);
 		free(line);
 	}

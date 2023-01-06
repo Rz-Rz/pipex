@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/03 11:52:05 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/06 20:47:06 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,4 @@ void	free_pipex(t_pipex *pipex)
 		free(pipex->cmd);
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
-	if (pipex->file1)
-		free(pipex->file1);
-	if (pipex->file2)
-		free(pipex->file2);
 }
