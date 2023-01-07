@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 16:56:54 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 20:00:55 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	multipipe(char *cmd, t_pipex *pipex)
+void	multipipe(char *cmd, t_pipex *pipex, int i)
 {
 	int		pid;
 
@@ -24,6 +24,13 @@ void	multipipe(char *cmd, t_pipex *pipex)
 	pid = fork();
 	if (pid == -1)
 		generic_err(pipex, "Fork error. (multipipe)", 1);
+	if (i == pipex->argc - 2 && pid == 0)
+	{
+		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
+		if (exec_bonus(pipex, cmd, STDIN_FILENO, pipex->fd_file2) == -1)
+			generic_err(pipex, "Exec error. (multipipe)", 1);
+		waitpid(pid, &pipex->status, 0);
+	}
 	else if (pid == 0)
 	{
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
@@ -35,8 +42,7 @@ void	multipipe(char *cmd, t_pipex *pipex)
 		close_fd(pipex, &pipex->fd[1], "Close error. (fd[1] in multipipe)");
 		if (dup2(pipex->fd[0], STDIN_FILENO) == -1)
 			generic_err(pipex, "Dup2 error. (multipipe)", 1);
-		/* if (waitpid(pid, NULL, 0) == -1) */
-		/* 	generic_err(pipex, "Waitpid error. (multipipe)", 1); */
+		close_fd(pipex, &pipex->fd[0], "Close error. (fd[1] in multipipe)");
 	}
 }
 
@@ -57,17 +63,21 @@ int main(int argc, char *argv[], char *envp[])
 	check_mode_infile(&pipex, &i);
 	check_mode_outfile(&pipex);
 	get_paths(&pipex, envp);
-	while (i < argc - 2)
-		multipipe(argv[i++], &pipex);
+	while (i <= argc - 2)
+	{
+		multipipe(argv[i], &pipex, i);
+		i++;
+	}
 	/* waitpid(-1, NULL, 0); */
-	pipex.pid = fork();
-	if (pipex.pid == 0)
-		exec_bonus(&pipex, argv[argc - 2], pipex.fd[0], pipex.fd_file2);
+	/* if (pipe(pipex.fd) == -1) */
+	/* 	generic_err(&pipex, "Pipe error. (main)", 1); */
+	/* pipex.pid = fork(); */
+	/* if (pipex.pid == 0) */
+	/* 	exec_bonus(&pipex, argv[argc - 2], pipex.fd[0], pipex.fd_file2); */
 	while(waitpid(0, NULL, 0) != -1)
 		;
-	/* close(); */
+	success(&pipex);
 	/* if (WEXITSTATUS(pipex.status) != 0) */
 	/* 	generic_err(&pipex, "Error in child process. (main)", 0); */
 	return (0);
 }
-
