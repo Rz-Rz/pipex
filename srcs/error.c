@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/06 20:47:06 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 12:26:19 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,29 @@
 void	generic_err(t_pipex *pipex, char *str, int system)
 {
 	free_pipex(pipex);
-	if (pipex->fd[0] != -1)
-		close(pipex->fd[0]);
-	if (pipex->fd[1] != -1)
-		close(pipex->fd[0]);
+	close_pipex(pipex);
 	if (system)
 		perror(str);
 	else
 		write(2, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
+}
+
+
+void	close_pipex(t_pipex *pipex)
+{
+	if ((pipex->fd_file1 > 2))
+		if (close(pipex->fd_file1) == -1)
+			perror("close (fd_file1)");
+	if (pipex->fd_file2 > 2) 
+		if (close(pipex->fd_file2) == -1)
+			perror("close (fd_file2)");
+	if (pipex->fd[0] > 2)
+		if (close(pipex->fd[0]) == -1)
+			perror("close (fd[0])");
+	if (pipex->fd[1] > 2)
+		if (close(pipex->fd[1]) == -1)
+			perror("close (fd[1])");
 }
 
 

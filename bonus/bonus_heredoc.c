@@ -6,17 +6,15 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:33:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/06 20:10:49 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 14:03:33 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 void   check_mode_infile(t_pipex *pipex, int *i)
 {
-	if (ft_strncmp("here_doc", pipex->argv[1], 8) == 0)
+	if (ft_strcmp("here_doc", pipex->argv[1]) == 0)
 	{
 		if (pipex->argc < 6)
 			generic_err(pipex, "Wrong numbers of arguments. (check_mode_infile)", 0);
@@ -70,7 +68,7 @@ void	put_heredoc(t_pipex *pipex)
 		line = get_next_line(STDIN_FILENO);
 		if (line == NULL)
 			generic_err(pipex, "Get next line failed. (put_heredoc)", 0);
-		if (ft_strncmp(line, pipex->argv[2], ft_strlen(pipex->argv[2])) == 0)
+		if (heredoc_cmp(line, pipex) == 0)
 		{
 			free(line);
 			close(pipex->fd[1]);
@@ -81,4 +79,12 @@ void	put_heredoc(t_pipex *pipex)
 	}
 	free(line);
 	close(pipex->fd[1]);
+}
+
+int	heredoc_cmp(char *line, t_pipex *pipex)
+{
+	if (ft_strlen(line) == (ft_strlen(pipex->argv[2]) + 1))
+		return(ft_strncmp(line, pipex->argv[2], ft_strlen(pipex->argv[2])));
+	else
+		return (1);
 }

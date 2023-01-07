@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/03 11:55:10 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 12:11:42 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,18 @@ int		f_open(char *file, int flag, int mode);
 void	get_paths(t_pipex *pipex, char *envp[]);
 char	*check_slash(char *str);
 char	*get_cmd(t_pipex *pipex, char *cmd);
-void	close_fd(t_pipex *pipex);
+void	close_fds(t_pipex *pipex);
 
 // error.c
 void	generic_err(t_pipex *pipex, char *str, int system);
 void	free_pipex(t_pipex *pipex);
+void	close_pipex(t_pipex *pipex);
+
+// close.c
+void	close_fd(t_pipex *pipex, int *fd, char *error_string);
+
+// success.c
+void	success(t_pipex *pipex);
 
 // childs.c
 int		exec(t_pipex *pipex, int arg, int stdin, int stdout);

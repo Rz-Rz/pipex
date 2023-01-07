@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/05 23:22:33 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 13:53:06 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int main(int argc, char *argv[], char *envp[])
 	int						i;
 
 	pipex = EmptyPipex;
+	if (*envp == NULL)
+		generic_err(&pipex, "No environment. (main)", 0);
 	if (argc < 5)
 		generic_err(&pipex, "Wrong numbers of arguments.", 0);
 	pipex.argv = argv;

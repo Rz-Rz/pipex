@@ -6,12 +6,12 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/05 22:02:58 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 14:02:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEXBONUS_H
+# define PIPEXBONUS_H
 
 /* write, read, close, access, pipe, dup, dup2, excve, fork*/
 /* STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO */
@@ -37,11 +37,9 @@
 /* errno */
 # include <errno.h>
 
-# include "../libft/libft.h"
-
 # include "../bonus/get_next_line.h"
-/* # define EXIT_SUCCESS 0 */
-/* # define EXIT_FAILURE -1 */
+
+# include "../libft/libft.h"
 
 typedef struct s_pipex
 {
@@ -70,14 +68,14 @@ int		f_open(char *file, int flag, int mode);
 void	get_paths(t_pipex *pipex, char *envp[]);
 char	*check_slash(char *str);
 char	*get_cmd(t_pipex *pipex, char *cmd);
-void	close_fd(t_pipex *pipex);
 
 // error.c
 void	generic_err(t_pipex *pipex, char *str, int system);
 void	free_pipex(t_pipex *pipex);
+void	close_pipex(t_pipex *pipex);
 
-// error bonus
-void 	unlink_err(t_pipex *pipex, char *str, int system, char *target);
+// close.c
+void	close_fd(t_pipex *pipex, int *fd, char *error_string);
 
 // childs.c
 int		exec(t_pipex *pipex, int arg, int stdin, int stdout);
@@ -93,6 +91,6 @@ void	here_doc(t_pipex *pipex);
 void	check_mode_infile(t_pipex *pipex, int *i);
 void	check_mode_outfile(t_pipex *pipex);
 void	put_heredoc(t_pipex *pipex);
-
+int		heredoc_cmp(char *line, t_pipex *pipex);
 
 #endif

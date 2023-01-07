@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/03 11:52:50 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 11:54:41 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char *check_slash(char *str)
 	return (str);
 }
 
-void close_fd(t_pipex *pipex)
+void close_fds(t_pipex *pipex)
 {
 	close(pipex->fd_file1);
 	close(pipex->fd[0]);
