@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 20:00:55 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 20:56:29 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,8 @@ int main(int argc, char *argv[], char *envp[])
 		multipipe(argv[i], &pipex, i);
 		i++;
 	}
-	/* waitpid(-1, NULL, 0); */
-	/* if (pipe(pipex.fd) == -1) */
-	/* 	generic_err(&pipex, "Pipe error. (main)", 1); */
-	/* pipex.pid = fork(); */
-	/* if (pipex.pid == 0) */
-	/* 	exec_bonus(&pipex, argv[argc - 2], pipex.fd[0], pipex.fd_file2); */
 	while(waitpid(0, NULL, 0) != -1)
 		;
 	success(&pipex);
-	/* if (WEXITSTATUS(pipex.status) != 0) */
-	/* 	generic_err(&pipex, "Error in child process. (main)", 0); */
 	return (0);
 }
