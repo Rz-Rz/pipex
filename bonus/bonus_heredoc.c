@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:33:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 14:03:33 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/07 15:08:33 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void   here_doc(t_pipex *pipex)
 	if (pipex->pid == 0)
 		put_heredoc(pipex);
 	else {
-		if (close(pipex->fd[1]) == -1)
-			generic_err(pipex, "Close error. (here_doc)", 1);
+		close_fd(pipex, &pipex->fd[1], "Close error. (fd[1] in here_doc)");
 		if (dup2(pipex->fd[0], STDIN_FILENO) == -1)
 			generic_err(pipex, "Dup2 error. (here_doc)", 1);
 		waitpid(pipex->pid, NULL, 0);
+		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in here_doc)");
 	}
 }
 
@@ -61,7 +61,7 @@ void	put_heredoc(t_pipex *pipex)
 {
 	char	*line;
 
-	close(pipex->fd[0]);
+	close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in put_heredoc)");
 	while (1)
 	{
 		write(1, "heredoc> ", 9);
@@ -71,14 +71,14 @@ void	put_heredoc(t_pipex *pipex)
 		if (heredoc_cmp(line, pipex) == 0)
 		{
 			free(line);
-			close(pipex->fd[1]);
+			close_fd(pipex, &pipex->fd[1], "Close error. (fd[1] in put_heredoc)");
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, pipex->fd[1]);
 		free(line);
 	}
 	free(line);
-	close(pipex->fd[1]);
+	close_fd(pipex, &pipex->fd[1], "Close error. (fd[1] in put_heredoc)");
 }
 
 int	heredoc_cmp(char *line, t_pipex *pipex)
