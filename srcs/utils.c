@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 11:54:41 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:34:21 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int f_open(char *file, int flag, int mode)
 		fd = open(file, flag, mode);
 	if (fd == -1)
 	{
-		perror("open");
+		perror(file);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
