@@ -6,13 +6,13 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:29:33 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 19:59:57 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 20:46:59 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-int		exec_bonus(t_pipex *pipex, char *cmd, int in, int out)
+int	exec_bonus(t_pipex *pipex, char *cmd, int in, int out)
 {
 	if (dup2(in, STDIN_FILENO) == -1)
 		generic_err(pipex, "Dup2 error. (stdin exec_bonus)", 1);

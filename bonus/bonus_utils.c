@@ -6,15 +6,15 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 19:39:29 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 20:46:38 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-int f_open(char *file, int flag, int mode)
+int	f_open(char *file, int flag, int mode)
 {
-	int fd;
+	int	fd;
 
 	if (mode == 0)
 		fd = open(file, flag);
@@ -40,11 +40,11 @@ void	get_paths(t_pipex *pipex, char *envp[])
 		generic_err(pipex, "Malloc error. (get_paths -> ft_split)", 0);
 }
 
-char *get_cmd(t_pipex *pipex, char *cmd)
+char	*get_cmd(t_pipex *pipex, char *cmd)
 {
-	char *tmp;
-	char *tmp2;
-	int i;
+	char	*tmp;
+	char	*tmp2;
+	int		i;
 
 	i = -1;
 	while (pipex->paths[++i])
@@ -68,9 +68,9 @@ char *get_cmd(t_pipex *pipex, char *cmd)
 	return (NULL);
 }
 
-char *check_slash(char *str)
+char	*check_slash(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

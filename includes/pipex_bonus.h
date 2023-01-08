@@ -6,12 +6,12 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 19:30:29 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 21:04:45 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEXBONUS_H
-# define PIPEXBONUS_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 /* write, read, close, access, pipe, dup, dup2, excve, fork*/
 /* STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO */
@@ -47,7 +47,7 @@ typedef struct s_pipex
 	char	**envp;
 	char	**cmd;
 	char	*path;
-	char 	**paths;
+	char	**paths;
 	char	*file1;
 	char	*file2;
 	char	*cmd_path;
@@ -74,6 +74,12 @@ void	generic_err(t_pipex *pipex, char *str, int system);
 void	free_pipex(t_pipex *pipex);
 void	close_pipex(t_pipex *pipex);
 int		ft_strcmp(const char *s1, const char *s2);
+
+// pipe.c
+void	pipe_fd(t_pipex *pipex, int *fd, char *error_string);
+
+// fork.c
+void	fork_pid(t_pipex *pipex, int *pid, char *error_string);
 
 // close.c
 void	close_fd(t_pipex *pipex, int *fd, char *error_string);

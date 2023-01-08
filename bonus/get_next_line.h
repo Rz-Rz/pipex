@@ -6,10 +6,9 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 11:24:40 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/02 11:24:50 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 20:50:25 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H

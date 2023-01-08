@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 19:50:39 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 20:39:36 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	generic_err(t_pipex *pipex, char *str, int system)
 	exit(EXIT_FAILURE);
 }
 
-
 void	close_pipex(t_pipex *pipex)
 {
 	if ((pipex->fd_file1 > 2))
@@ -46,10 +45,9 @@ void	close_pipex(t_pipex *pipex)
 			perror("close (fd[1])");
 }
 
-
 void	free_pipex(t_pipex *pipex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (pipex->paths)

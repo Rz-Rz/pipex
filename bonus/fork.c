@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   success.c                                          :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 12:10:46 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 20:41:50 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/01/08 20:54:28 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/01/08 20:56:28 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
-void	success(t_pipex *pipex)
+void	fork_pid(t_pipex *pipex, int *pid, char *error_string)
 {
-	free_pipex(pipex);
-	close_pipex(pipex);
-	exit(EXIT_SUCCESS);
+	*pid = fork();
+	if (*pid == -1)
+		generic_err(pipex, error_string, 1);
 }

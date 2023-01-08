@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 19:58:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 20:56:44 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ void	multipipe(char *cmd, t_pipex *pipex, int i)
 {
 	int		pid;
 
-	if (pipe(pipex->fd) == -1)
-		generic_err(pipex, "Pipe error. (multipipe)", 1);
-	pid = fork();
-	if (pid == -1)
-		generic_err(pipex, "Fork error. (multipipe)", 1);
+	pipe_fd(pipex, pipex->fd, "Pipe error. (multipipe)");
+	fork_pid(pipex, &pid, "Fork error. (multipipe)");
 	if (i == pipex->argc - 2 && pid == 0)
 	{
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
@@ -46,13 +43,13 @@ void	multipipe(char *cmd, t_pipex *pipex, int i)
 	}
 }
 
-int main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
-	static const t_pipex	EmptyPipex;
+	static const t_pipex	emptypipex;
 	t_pipex					pipex;
 	int						i;
 
-	pipex = EmptyPipex;
+	pipex = emptypipex;
 	if (*envp == NULL)
 		generic_err(&pipex, "No environment. (main)", 0);
 	if (argc < 5)
@@ -68,7 +65,7 @@ int main(int argc, char *argv[], char *envp[])
 		multipipe(argv[i], &pipex, i);
 		i++;
 	}
-	while(waitpid(0, NULL, 0) != -1)
+	while (waitpid(0, NULL, 0) != -1)
 		;
 	success(&pipex);
 	return (0);

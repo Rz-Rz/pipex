@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 12:11:42 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 21:03:22 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_pipex
 	char	**envp;
 	char	**cmd;
 	char	*path;
-	char 	**paths;
+	char	**paths;
 	char	*cmd_path;
 	int		fd[2];
 	int		children1;
