@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 13:46:42 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 09:50:03 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	generic_err(t_pipex *pipex, char *str, int system)
 {
 	free_pipex(pipex);
-	if (pipex->fd[0] != -1)
-		close(pipex->fd[0]);
-	if (pipex->fd[1] != -1)
-		close(pipex->fd[0]);
+	close_pipex(pipex);
 	if (system)
 		perror(str);
 	else
@@ -29,17 +26,13 @@ void	generic_err(t_pipex *pipex, char *str, int system)
 void	close_pipex(t_pipex *pipex)
 {
 	if ((pipex->fd_file1 > 2))
-		if (close(pipex->fd_file1) == -1)
-			perror("close (fd_file1)");
-	if (pipex->fd_file2 > 2) 
-		if (close(pipex->fd_file2) == -1)
-			perror("close (fd_file2)");
+		close_fd(pipex, &pipex->fd_file1, "Close error. (fd_file1 in close_pipex)");
+	if (pipex->fd_file2 > 2)
+		close_fd(pipex, &pipex->fd_file2, "Close error. (fd_file2 in close_pipex)");
 	if (pipex->fd[0] > 2)
-		if (close(pipex->fd[0]) == -1)
-			perror("close (fd[0])");
+		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in close_pipex)");
 	if (pipex->fd[1] > 2)
-		if (close(pipex->fd[1]) == -1)
-			perror("close (fd[1])");
+		close_fd(pipex, &pipex->fd[1], "Close error. (fd[1] in close_pipex)");
 }
 
 void	free_pipex(t_pipex *pipex)
@@ -55,8 +48,13 @@ void	free_pipex(t_pipex *pipex)
 	}
 	if (pipex->path)
 		free(pipex->path);
+	i = 0;
 	if (pipex->cmd)
+	{
+		while (pipex->cmd[i])
+			free(pipex->cmd[i++]);
 		free(pipex->cmd);
+	}
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
 }

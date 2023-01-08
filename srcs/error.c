@@ -6,11 +6,12 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 12:26:19 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 09:34:29 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+#include <unistd.h>
 
 void	generic_err(t_pipex *pipex, char *str, int system)
 {
@@ -19,7 +20,7 @@ void	generic_err(t_pipex *pipex, char *str, int system)
 	if (system)
 		perror(str);
 	else
-		write(2, str, ft_strlen(str));
+		write(STDERR_FILENO, str, ft_strlen(str));
 	exit(EXIT_FAILURE);
 }
 
@@ -29,7 +30,7 @@ void	close_pipex(t_pipex *pipex)
 	if ((pipex->fd_file1 > 2))
 		if (close(pipex->fd_file1) == -1)
 			perror("close (fd_file1)");
-	if (pipex->fd_file2 > 2) 
+	if (pipex->fd_file2 > 2)
 		if (close(pipex->fd_file2) == -1)
 			perror("close (fd_file2)");
 	if (pipex->fd[0] > 2)
@@ -52,10 +53,14 @@ void	free_pipex(t_pipex *pipex)
 			free(pipex->paths[i++]);
 		free(pipex->paths);
 	}
-	if (pipex->path)
-		free(pipex->path);
+	free(pipex->path);
+	i = 0;
 	if (pipex->cmd)
+	{
+		while (pipex->cmd[i])
+			free(pipex->cmd[i++]);
 		free(pipex->cmd);
+	}
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
 }

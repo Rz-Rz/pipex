@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:29:33 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/07 12:14:53 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/08 09:07:05 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		exec(t_pipex *pipex, int arg, int stdin, int stdout)
 	pipex->cmd_path = get_cmd(pipex, pipex->cmd[0]);
 	if (pipex->cmd_path == NULL)
 		generic_err(pipex, "Command does not exist. (get_cmd in exec)", 0);
+	close_pipex(pipex);
 	if (execve(pipex->cmd_path, pipex->cmd, pipex->envp) == -1)
 		generic_err(pipex, "Execve error. (exec)", 1);
 	return (-1);
