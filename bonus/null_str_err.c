@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   null_str_err.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 21:42:05 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 21:42:12 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/01/10 21:45:46 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/01/10 21:55:42 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
-char	*check_fpath(t_pipex *pipex, char *cmd)
+void	null_str_err(t_pipex *pipex, char *str)
 {
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(cmd, F_OK | X_OK) == 0)
-			return (cmd);
-		else
-		{
-			generic_err(pipex, "Command not found", 0);
-			return ((char *)0);
-		}
-	}
-	else
-		return ((char *)0);
+	if (str == NULL)
+		generic_err(pipex, "Malloc error. (get_cmd -> ft_strjoin)\n", 0);
 }

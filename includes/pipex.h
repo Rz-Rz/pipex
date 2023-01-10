@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 17:11:45 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/10 21:58:27 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	free_pipex(t_pipex *pipex);
 void	close_pipex(t_pipex *pipex);
 
 char	*check_fpath(t_pipex *pipex, char *cmd);
+
+// null_str_err
+void	null_str_err(t_pipex *pipex, char *str);
 
 // close.c
 void	close_fd(t_pipex *pipex, int *fd, char *error_string);

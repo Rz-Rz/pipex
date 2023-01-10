@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 16:29:39 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/10 22:06:20 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int argc, char *argv[], char *envp[])
 		generic_err(&pipex, "Wrong numbers of arguments.\n", 0);
 	pipex.argv = argv;
 	pipex.envp = envp;
-	get_paths(&pipex, envp);
 	pipex.fd_file1 = f_open(argv[1], O_RDONLY, 0);
 	pipex.fd_file2 = f_open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	get_paths(&pipex, envp);
 	if (pipe(pipex.fd) == -1)
 		generic_err(&pipex, "Pipe error.\n", 1);
 	child_exec(&pipex);

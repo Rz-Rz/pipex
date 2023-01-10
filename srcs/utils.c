@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 18:41:47 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/10 22:00:21 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ char	*get_cmd(t_pipex *pipex, char *cmd)
 	{
 		check_slash(pipex->paths[i]);
 		tmp = ft_strjoin(pipex->paths[i], "/");
+		null_str_err(pipex, tmp);
 		tmp2 = tmp;
-		if (tmp == NULL)
-			generic_err(pipex, "Malloc error. (ft_strjoin)\n", 0);
 		tmp = ft_strjoin(tmp, cmd);
-		if (tmp == NULL)
-			generic_err(pipex, "Malloc error. (ft_strjoin)\n", 0);
+		null_str_err(pipex, tmp);
 		if (access(tmp, F_OK | X_OK) == 0)
 		{
 			free(tmp2);
