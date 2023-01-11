@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 21:55:32 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:08:10 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	f_open(char *file, int flag, int mode)
 	if (fd == -1)
 	{
 		perror(file);
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 	return (fd);
 }
@@ -32,14 +32,20 @@ void	get_paths(t_pipex *pipex, char *envp[])
 {
 	while (*envp != NULL && ft_strncmp("PATH=", *envp, 5))
 		envp++;
-	if (ft_strncmp(*envp, "PATH=", 5))
-		generic_err(pipex, "Path not found", 0);
-	pipex->path = ft_strdup(*envp + 5);
-	if (pipex->path == NULL)
-		generic_err(pipex, "Malloc error. (get_paths -> ft_strdup)", 0);
-	pipex->paths = ft_split(pipex->path, ':');
-	if (pipex->paths == NULL)
-		generic_err(pipex, "Malloc error. (get_paths -> ft_split)", 0);
+	if (ft_strncmp(*envp, "PATH=", 5) == 0)
+	{
+		pipex->is_path = 1;
+		pipex->path = ft_strdup(*envp + 5);
+		if (pipex->path == NULL)
+			generic_err(pipex, "Malloc error\
+					. (get_paths -> ft_strdup)", 0, EXIT_FAILURE);
+		pipex->paths = ft_split(pipex->path, ':');
+		if (pipex->paths == NULL)
+			generic_err(pipex, "Malloc error\
+					. (get_paths -> ft_split)", 0, EXIT_FAILURE);
+	}
+	else
+		pipex->is_path = 0;
 }
 
 char	*get_cmd(t_pipex *pipex, char *cmd)
@@ -51,6 +57,8 @@ char	*get_cmd(t_pipex *pipex, char *cmd)
 	tmp = check_fpath(pipex, cmd);
 	if (tmp != NULL)
 		return (ft_strdup(tmp));
+	if (pipex->is_path == 0)
+		generic_err(pipex, cmd, 3, CMD_NOT_FOUND);
 	i = -1;
 	while (pipex->paths[++i])
 	{

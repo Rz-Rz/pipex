@@ -6,11 +6,12 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 21:49:59 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 21:50:20 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 15:57:09 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
+#include <stdlib.h>
 
 char	*check_fpath(t_pipex *pipex, char *cmd)
 {
@@ -20,7 +21,10 @@ char	*check_fpath(t_pipex *pipex, char *cmd)
 			return (cmd);
 		else
 		{
-			generic_err(pipex, cmd, 1);
+			if (pipex->is_path == 0)
+				generic_err(pipex, cmd, 3, CMD_NOT_FOUND);
+			else
+				generic_err(pipex, cmd, 1, CMD_NOT_FOUND);
 			return ((char *)0);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 20:56:44 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 15:29:32 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ void	multipipe(char *cmd, t_pipex *pipex, int i)
 	{
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
 		if (exec_bonus(pipex, cmd, STDIN_FILENO, pipex->fd_file2) == -1)
-			generic_err(pipex, "Exec error. (multipipe)", 1);
+			generic_err(pipex, "Exec error. (multipipe)", 1, EXIT_FAILURE);
 		waitpid(pid, &pipex->status, 0);
 	}
 	else if (pid == 0)
 	{
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
 		if (exec_bonus(pipex, cmd, STDIN_FILENO, pipex->fd[1]) == -1)
-			generic_err(pipex, "Exec error. (multipipe)", 1);
+			generic_err(pipex, "Exec error. (multipipe)", 1, EXIT_FAILURE);
 	}
 	else
 	{
 		close_fd(pipex, &pipex->fd[1], "Close error. (fd[1] in multipipe)");
 		if (dup2(pipex->fd[0], STDIN_FILENO) == -1)
-			generic_err(pipex, "Dup2 error. (multipipe)", 1);
+			generic_err(pipex, "Dup2 error. (multipipe)", 1, EXIT_FAILURE);
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[1] in multipipe)");
 	}
 }
@@ -51,9 +51,9 @@ int	main(int argc, char *argv[], char *envp[])
 
 	pipex = emptypipex;
 	if (*envp == NULL)
-		generic_err(&pipex, "No environment. (main)", 0);
+		generic_err(&pipex, NULL, 0, EXIT_FAILURE);
 	if (argc < 5)
-		generic_err(&pipex, "Wrong numbers of arguments.", 0);
+		generic_err(&pipex, "Wrong numbers of arguments.", 0, EXIT_FAILURE);
 	pipex.argv = argv;
 	pipex.envp = envp;
 	pipex.argc = argc;

@@ -6,26 +6,35 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 20:45:39 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:10:50 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-void	generic_err(t_pipex *pipex, char *str, int system)
+void	generic_err(t_pipex *pipex, char *str, int system, int exitcode)
 {
-	free_pipex(pipex);
-	close_pipex(pipex);
+	char	*s;
+
 	if (system == 1)
 		perror(str);
 	else if (system == 2)
 	{
-		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putendl_fd(": Command not found", STDERR_FILENO);
+		s = ft_strjoin(str, ": Command not found\n");
+		ft_putstr_fd(s, STDERR_FILENO);
+		free(s);
+	}
+	else if (system == 3)
+	{
+		s = ft_strjoin(str, ": No such file or directory\n");
+		ft_putstr_fd(s, STDERR_FILENO);
+		free(s);
 	}
 	else
 		write(2, str, ft_strlen(str));
-	exit(EXIT_FAILURE);
+	free_pipex(pipex);
+	close_pipex(pipex);
+	exit(exitcode);
 }
 
 void	close_pipex(t_pipex *pipex)

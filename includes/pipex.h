@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 09:19:02 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:07:28 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_pipex
 	int		fd_file1;
 	int		fd_file2;
 	int		argc;
+	int		is_path;
 
 }	t_pipex;
 
