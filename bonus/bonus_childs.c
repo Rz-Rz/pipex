@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:29:33 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 15:21:42 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 18:41:02 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int	exec_bonus(t_pipex *pipex, char *cmd, int in, int out)
 {
+	if (in == -1)
+		generic_err(pipex, NULL, 0, EXIT_FAILURE);
 	if (dup2(in, STDIN_FILENO) == -1)
 		generic_err(pipex, "Dup2 error. (stdin exec_bonus)", 1, EXIT_FAILURE);
 	if (dup2(out, STDOUT_FILENO) == -1)
