@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 16:11:05 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 22:00:13 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	generic_err(t_pipex *pipex, char *str, int system, int exitcode)
 		ft_putstr_fd(s, STDERR_FILENO);
 		free(s);
 	}
-	else
+	else if (str != NULL)
 		write(2, str, ft_strlen(str));
 	free_pipex(pipex);
 	close_pipex(pipex);

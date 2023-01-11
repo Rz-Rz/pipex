@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 18:20:48 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 21:54:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[], char *envp[])
 	child_exec(&pipex);
 	while (waitpid(0, NULL, 0) != -1)
 		;
-	close_fds(&pipex);
+	close_pipex(&pipex);
 	free_pipex(&pipex);
 	return (0);
 }
