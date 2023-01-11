@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 16:08:10 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 17:34:15 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ char	*get_cmd(t_pipex *pipex, char *cmd)
 	tmp = check_fpath(pipex, cmd);
 	if (tmp != NULL)
 		return (ft_strdup(tmp));
-	if (pipex->is_path == 0)
-		generic_err(pipex, cmd, 3, CMD_NOT_FOUND);
+	path_null(pipex, cmd);
 	i = -1;
 	while (pipex->paths[++i])
 	{
@@ -73,8 +72,7 @@ char	*get_cmd(t_pipex *pipex, char *cmd)
 			free(tmp2);
 			return (tmp);
 		}
-		free(tmp);
-		free(tmp2);
+		freestr(tmp, tmp2);
 	}
 	return (NULL);
 }

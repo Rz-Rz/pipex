@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 16:07:28 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 17:17:46 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,14 @@ void	generic_err(t_pipex *pipex, char *str, int system, int exitcode);
 void	free_pipex(t_pipex *pipex);
 void	close_pipex(t_pipex *pipex);
 
+// utils_2.c
 char	*check_fpath(t_pipex *pipex, char *cmd);
+
+// freestr
+void	freestr(char *s1, char *s2);
+
+// path_null.c
+void	path_null(t_pipex *pipex, char *cmd);
 
 // null_str_err
 void	null_str_err(t_pipex *pipex, char *str);

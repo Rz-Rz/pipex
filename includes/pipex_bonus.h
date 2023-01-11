@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 15:22:54 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 17:25:13 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ void	fork_pid(t_pipex *pipex, int *pid, char *error_string);
 
 // close.c
 void	close_fd(t_pipex *pipex, int *fd, char *error_string);
+
+// freestr
+void	freestr(char *s1, char *s2);
+
+// path_null.c
+void	path_null(t_pipex *pipex, char *cmd);
 
 // null_str_err
 void	null_str_err(t_pipex *pipex, char *str);

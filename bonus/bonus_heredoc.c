@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:33:49 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 14:56:04 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 17:35:44 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	check_mode_infile(t_pipex *pipex, int *i)
 		pipex->fd_file1 = f_open(pipex->argv[1], O_RDONLY, 0);
 		*i = 2;
 		if (dup2(pipex->fd_file1, 0) == -1)
-			generic_err(pipex, "Dup2 error. (check_mode_infile)", 1, EXIT_FAILURE);
+			generic_err(pipex, "Dup2 error. (check_mode_infile)"\
+					, 1, EXIT_FAILURE);
 	}
 }
 
