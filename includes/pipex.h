@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 21:58:27 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 09:19:02 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 # include "../libft/libft.h"
 
+# define CMD_NOT_FOUND 127
+
 typedef struct s_pipex
 {
 	char	**argv;
@@ -65,7 +67,7 @@ char	*get_cmd(t_pipex *pipex, char *cmd);
 void	close_fds(t_pipex *pipex);
 
 // error.c
-void	generic_err(t_pipex *pipex, char *str, int system);
+void	generic_err(t_pipex *pipex, char *str, int system, int exitcode);
 void	free_pipex(t_pipex *pipex);
 void	close_pipex(t_pipex *pipex);
 

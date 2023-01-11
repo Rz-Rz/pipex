@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:14:00 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/10 22:00:21 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 09:34:59 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	get_paths(t_pipex *pipex, char *envp[])
 	while (*envp != NULL && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	if (ft_strncmp(*envp, "PATH=", 5))
-		generic_err(pipex, "Path not found", 0);
+		generic_err(pipex, "Path not found", 0, EXIT_SUCCESS);
 	pipex->path = ft_strdup(*envp + 5);
 	if (pipex->path == NULL)
-		generic_err(pipex, "Malloc error. (ft_strdup)\n", 0);
+		generic_err(pipex, "Malloc error. (ft_strdup)\n", 0, EXIT_FAILURE);
 	pipex->paths = ft_split(pipex->path, ':');
 	if (pipex->paths == NULL)
-		generic_err(pipex, "Malloc error. (ft_split)\n", 0);
+		generic_err(pipex, "Malloc error. (ft_split)\n", 0, EXIT_FAILURE);
 }
 
 char	*get_cmd(t_pipex *pipex, char *cmd)

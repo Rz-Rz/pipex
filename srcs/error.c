@@ -6,14 +6,14 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:07:12 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/08 20:39:36 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 09:11:41 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 #include <unistd.h>
 
-void	generic_err(t_pipex *pipex, char *str, int system)
+void	generic_err(t_pipex *pipex, char *str, int system, int exitcode)
 {
 	free_pipex(pipex);
 	close_pipex(pipex);
@@ -26,7 +26,7 @@ void	generic_err(t_pipex *pipex, char *str, int system)
 	}
 	else
 		write(STDERR_FILENO, str, ft_strlen(str));
-	exit(EXIT_FAILURE);
+	exit(exitcode);
 }
 
 void	close_pipex(t_pipex *pipex)

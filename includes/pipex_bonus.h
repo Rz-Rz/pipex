@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 08:46:34 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/11 09:52:21 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		exec(t_pipex *pipex, int arg, int stdin, int stdout);
 
 // pipex.c
 void	child_exec(t_pipex *pipex);
+
 // bonus_success.c
 void	success(t_pipex *pipex);
 
