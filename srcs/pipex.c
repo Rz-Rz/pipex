@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 21:54:15 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/12 12:01:48 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ int	main(int argc, char *argv[], char *envp[])
 	if (pipe(pipex.fd) == -1)
 		generic_err(&pipex, "Pipe error.\n", 1, EXIT_FAILURE);
 	child_exec(&pipex);
-	while (waitpid(0, NULL, 0) != -1)
-		;
-	close_pipex(&pipex);
-	free_pipex(&pipex);
+	waitpid(pipex.children1, NULL, 0);
+	waitpid(pipex.children2, &pipex.status, 0);
+	success(&pipex);
 	return (0);
 }
 

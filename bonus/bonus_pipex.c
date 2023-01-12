@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:28:22 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 15:29:32 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/12 12:52:21 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	multipipe(char *cmd, t_pipex *pipex, int i)
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
 		if (exec_bonus(pipex, cmd, STDIN_FILENO, pipex->fd_file2) == -1)
 			generic_err(pipex, "Exec error. (multipipe)", 1, EXIT_FAILURE);
-		waitpid(pid, &pipex->status, 0);
 	}
 	else if (pid == 0)
 	{
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[0] in multipipe)");
+		wrg_infile(pipex);
 		if (exec_bonus(pipex, cmd, STDIN_FILENO, pipex->fd[1]) == -1)
 			generic_err(pipex, "Exec error. (multipipe)", 1, EXIT_FAILURE);
 	}
@@ -40,6 +40,7 @@ void	multipipe(char *cmd, t_pipex *pipex, int i)
 		if (dup2(pipex->fd[0], STDIN_FILENO) == -1)
 			generic_err(pipex, "Dup2 error. (multipipe)", 1, EXIT_FAILURE);
 		close_fd(pipex, &pipex->fd[0], "Close error. (fd[1] in multipipe)");
+		pipeline_status(pipex, i, pid);
 	}
 }
 

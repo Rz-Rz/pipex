@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:29:33 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 21:58:17 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/12 10:47:39 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@ int	exec(t_pipex *pipex, int arg, int in, int out)
 	if (in == -1)
 		generic_err(pipex, NULL, 0, EXIT_FAILURE);
 	if (out == -1)
-	{
-		/* free_pipex(pipex); */
-		/* close_pipex(pipex); */
-		/* exit(EXIT_FAILURE); */
 		generic_err(pipex, NULL, 0, EXIT_FAILURE);
-	}
-
 	if (dup2(in, STDIN_FILENO) == -1)
 		generic_err(pipex, "Dup2 error. (in in exec)", 1, EXIT_FAILURE);
 	if (dup2(out, STDOUT_FILENO) == -1)

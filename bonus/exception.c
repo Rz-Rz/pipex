@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_success.c                                    :+:      :+:    :+:   */
+/*   exception.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 15:00:51 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/12 11:33:24 by kdhrif           ###   ########.fr       */
+/*   Created: 2023/01/12 12:44:59 by kdhrif            #+#    #+#             */
+/*   Updated: 2023/01/12 12:47:35 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-void	success(t_pipex *pipex)
+void	wrg_infile(t_pipex *pipex)
 {
-	free_pipex(pipex);
-	close_pipex(pipex);
-	exit(exit_macro(pipex->status));
+	if (pipex->fd_file1 == -2)
+	{
+		pipex->fd_file1 = -1;
+		generic_err(pipex, NULL, 0, EXIT_FAILURE);
+	}
 }

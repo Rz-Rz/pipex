@@ -6,7 +6,7 @@
 /*   By: kdhrif <kdhrif@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 09:16:57 by kdhrif            #+#    #+#             */
-/*   Updated: 2023/01/11 17:25:13 by kdhrif           ###   ########.fr       */
+/*   Updated: 2023/01/12 12:51:44 by kdhrif           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,17 @@ void	free_pipex(t_pipex *pipex);
 void	close_pipex(t_pipex *pipex);
 int		ft_strcmp(const char *s1, const char *s2);
 
+// utils_2.c
 char	*check_fpath(t_pipex *pipex, char *cmd);
+
+// pipeline_status.c
+void	pipeline_status(t_pipex *pipex, int i, int pid);
+
+// exit_macro.c
+int		exit_macro(int status);
+
+// exception.c
+void	wrg_infile(t_pipex *pipex);
 
 // pipe.c
 void	pipe_fd(t_pipex *pipex, int *fd, char *error_string);
