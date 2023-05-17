@@ -27,7 +27,7 @@ void perror(const char *str);
 ```
 - The **strerror**() function, which returns a pointer to the textual representation of the current errno value.
 ```C
-char *strerror(int errnum)
+char *strerror(int errnum);
 ```
 Both of these function works with the global variable **errno**. To correctly use it you must first include the following header file : **errno.h**.
 - The **errno** is set to zero at program startup. **Certain functions of the standard C library** (such as fork, pipe, dup2...) modify its value to other than zero to signal some types of error. 
@@ -90,5 +90,14 @@ Linux systems have a finite number of process IDs — 32767 by default on 32-bit
 If a system has many zombie processes, they can fill up the process table, preventing new processes from being created.  
 This is known as a "zombie apocalypse" in Unix parlance.
 
-**Handling the bonus status exit**.
+**Handling the bonus status exit**
+Now to deal with an undefined number of pipes. One of the easy tricks to wait for all process to finish is the following:
+```C
+while (waitpid(0, NULL, 0) != -1)
+	;
+```
+This line of code represents a loop that continues to execute as long as the **waitpid**() system call returns a value not equal to -1. In the context of Unix-based systems, **waitpid**() is a system call that's used for making a parent process wait until one of its child processes exits.
+The **waitpid**() system call takes three parameters. The first one is the process ID (pid) of the child process that the parent process should wait for. A pid of 0 means that the parent process should wait for any of its child processes to exit.
+The second parameter of waitpid() is a pointer to an integer where the exit status of the child process will be stored. In this case, NULL is passed as the second parameter, indicating that the parent process is not interested in the exit status of the child process. This is common when the parent process only needs to ensure that all child processes have finished, without needing to know how they finished.
+The third parameter of waitpid() is used to modify the behavior of the system call. A value of 0 means that the waitpid() call will block, i.e., it will cause the parent process to pause its execution until a child process exits.
 
