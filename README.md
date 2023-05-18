@@ -180,7 +180,7 @@ The third parameter of waitpid() is used to modify the behavior of the system ca
 Of course before that we want to wait first for the last command the same way we showed earlier, with the corresponding pid and parse the status code to correctly assign a proper exit code. 
 
 ### Edge Cases  
-These are key things to look for, we could call them the building blocks of pipex and unix inter system communication. It is easy to get the wrong.
+These are key things to look for, we could call them the building blocks of pipex and unix inter system communication. It is easy to get them wrong.
 
 1. **Parallel Execution** : Commands run in parallel, not sequentially. This allows the commands to process data as it becomes available, for example, the second command can start processing as soon as the first command produces some output. A good way to test if your architecture has been built for parallel execution is the following pipe command : **sleep 5 | sleep 5**. Your program should only sleep for a total of 5 second rather than 10 second total because both sleep command are **executed at the same time**.
 
